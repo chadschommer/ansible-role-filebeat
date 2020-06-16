@@ -13,10 +13,12 @@ output:
     # Array of hosts to connect to.
     hosts: {{ filebeat_output_elasticsearch_hosts | to_json }}
 
+{% if filebeat_elasticsearch_basic_auth_enabled %}
     # Optional protocol and basic auth credentials. These are deprecated.
-    #protocol: "https"
-    #username: "admin"
-    #password: "s3cr3t"
+    protocol: {{ filebeat_protocol }}
+    username: {{ filebeat_username }}
+    password: {{ filebeat_password }}
+{% endif %}
 
     # Number of workers per Elasticsearch host.
     #worker: 1
